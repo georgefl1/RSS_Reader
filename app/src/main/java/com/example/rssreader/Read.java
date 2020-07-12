@@ -7,10 +7,11 @@ import android.webkit.WebSettings;
 import android.webkit.WebView;
 
 import com.example.rssreader.Adapter.FeedAdapter;
-
+/** Read Activity Class */
 public class Read extends AppCompatActivity {
 
     @Override
+    /** method onCreate displays the web page url of the RSS feed row that was clicked to intent this activity so the user can read it from the activity on the creation of activity Read*/
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_read);

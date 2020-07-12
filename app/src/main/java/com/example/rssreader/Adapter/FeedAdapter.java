@@ -16,12 +16,25 @@ import com.example.rssreader.Interface.ItemClickListener;
 import com.example.rssreader.R;
 import com.example.rssreader.Read;
 
+/**
+ * Class for adapting the RSSObject feed data into the recyclerView rows in activity MainActivity through FeedViewHolders.
+ * Creates an onclick and onLongClick listener for each FeedViewHolder.
+ *
+ * @author George Lord
+ * @version 7.11.2020
+ */
+
 class FeedViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener,View.OnLongClickListener //defines the individual views that the RecyclerView will hold
 {
 
     public TextView txtTitle,txtPubDate,txtContent;
     private ItemClickListener itemClickListener;
 
+    /**
+     * Constructor method for FeedViewHolder. Display's the itemView's title, publish date, and content, and creates an on click and on long click listener for the item.
+     *
+     * @param itemView The itemView to be displayed in the ViewHolder.
+     */
     public FeedViewHolder(View itemView) {
         super(itemView);
 
@@ -50,6 +63,14 @@ class FeedViewHolder extends RecyclerView.ViewHolder implements View.OnClickList
     }
 }
 
+/**
+ * Class for adapting each FeedViewHolder into a row showing its title, pubdate, and content.
+ * Also codes for when the user clicks on a recyclerView FeedViewHolder to start an intent for activity Read to read the corresponding article's URL in-app.
+ *
+ * @author George Lord
+ * @version 7.11.2020
+ */
+
 public class FeedAdapter extends RecyclerView.Adapter<FeedViewHolder> {
 
     private RSSObject rssObject;
@@ -71,6 +92,13 @@ public class FeedAdapter extends RecyclerView.Adapter<FeedViewHolder> {
     }
 
     @Override
+
+    /**
+     * Method that sets the title, pubdate, and content of each FeedViewHolder to its corresponding value parsed from the RSSObject and formatted neatly, and also starts activity Read to display the corresponding article's URL in-app.
+     *
+     * @param holder The article's own FeedViewHolder.
+     * @param position The article number in the list of article items in the RSS object.
+     */
     public void onBindViewHolder(FeedViewHolder holder, int position) {
 
         holder.txtTitle.setText(rssObject.getItems().get(position).getTitle());

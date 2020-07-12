@@ -1,5 +1,11 @@
 package com.example.rssreader.Model;
 
+/**
+ * Class Feed holds data parsed from individual RSS feed articles
+ *
+ * @author George Lord
+ * @version 7.11.2020
+ */
 public class Feed
 {
     public String url;

@@ -8,11 +8,24 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
+/**
+ * Class HTTPDataHandler takes the raw data from the RSS feed URL and builds a string from it containing all the RSS page's raw data in string format to be parsed and converted into an RSSObject
+ *
+ * @author George Lord
+ * @version 7.11.2020
+ */
 public class HTTPDataHandler {
     static String stream = null;
 
     public HTTPDataHandler() {
     }
+
+    /**
+     * Method that takes the url where the RSS data can be found in JSON format and builds and returns a string from it containing all the RSS feed information for use in creating the RSSObject.
+     *
+     * @param urlString The url containing the RSS page data in RSS2JSON format as a string.
+     * @return The string built from the RSS page at urlString containing the RSS data for creation of an RSSObject.
+     */
 
     public String GetHTTPData(String urlString)
     {

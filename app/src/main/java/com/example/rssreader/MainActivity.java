@@ -19,6 +19,15 @@ import android.widget.Toast;
 import com.example.rssreader.Common.HTTPDataHandler;
 import com.example.rssreader.Model.RSSObject;
 
+/**
+ * Activity for displaying the recyclerView containing all of the rows of RSS articles made by the FeedAdapter from the RSSObject, and a refresh button to load/reload the RSS page into an RSS object with possibly new or different RSS articles to display.
+ *
+ * Runs the method to create the RSSObject for the RSS feed and display it on creation of the activity as well.
+ *
+ * @author George Lord
+ * @version 7.11.2020
+ */
+
 public class MainActivity extends AppCompatActivity {
 
     RecyclerView recyclerView;
@@ -29,6 +38,8 @@ public class MainActivity extends AppCompatActivity {
     private final String RSS_to_Json_API = "https://api.rss2json.com/v1/api.json?rss_url=";
 
     @Override
+
+    /** onCreate method runs on creation of MainActivity */
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
@@ -41,6 +52,8 @@ public class MainActivity extends AppCompatActivity {
         loadRSS(); // loads the RSS feed initially
 
     }
+
+    /** addListenerOnButton adds listener for refresh button on MainActivity */
     public void addListenerOnButton () {
 
         refreshButton = (ImageButton) findViewById(R.id.refresh);
@@ -56,18 +69,27 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
+    /** loadRSS method called to (re)load the RSS feed into rows on the recyclerView in MainActivity
+     *
+     * @deprecated AsyncTask is depreciated, but it works.
+     * */
     private void loadRSS() {
-
         @SuppressLint("StaticFieldLeak") AsyncTask<String,String,String> loadRSSAsync = new AsyncTask<String, String, String>() { //makes an AsyncTask to handle loading the RSS feed
             ProgressDialog mDialog = new ProgressDialog(MainActivity.this); // creates a dialogue to show the user progress of loading rss
 
             @Override
+            /** Overridden AsyncTask method onPreExecute lets user know the RSS feed is being loaded */
             protected void onPreExecute() {
                 mDialog.setMessage("Loading...");
                 mDialog.show(); //tells the user it is loading the RRS feed when it starts doing so
             }
 
             @Override
+            /**
+             * Overridden AsyncTask method doInBackground loads the RSS feed from its HTML page and returns parsed data
+             *
+             * @return The resulting string data of the RSS feed taken from the RSS feed url by HTTPDataHandler for creation of the RSSObject
+             */
             protected String doInBackground(String... params) {
                 String result;
                 HTTPDataHandler http = new HTTPDataHandler();
@@ -76,6 +98,7 @@ public class MainActivity extends AppCompatActivity {
             }
 
             @Override
+            /** Overridden AsyncTask method onPostExecute creates an RSS object from previously loaded RSS page data and pushes it into MainActivity's recyclerView rows through FeedAdapter */
             protected void onPostExecute(String s) {
                 mDialog.dismiss();
                 rssObject = new Gson().fromJson(s, RSSObject.class); //creates a new RSS object from the JSON returned by the doInbackground method

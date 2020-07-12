@@ -2,6 +2,13 @@ package com.example.rssreader.Model;
 
 import java.util.List;
 
+/**
+ * Class Item holds even more data parsed from individual RSS feed articles
+ *
+ * @author George Lord
+ * @version 7.11.2020
+ */
+
 public class Item
 {
     public String title;

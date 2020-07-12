@@ -2,6 +2,13 @@ package com.example.rssreader.Model;
 
 import java.util.List;
 
+/**
+ * Class RSSObject creates the RSS object that, along with Enclosure, Feed, and Items, holds all the data parsed the RSS feed
+ *
+ * @author George Lord
+ * @version 7.11.2020
+ */
+
 public class RSSObject
 {
     public String status;
